@@ -48,8 +48,8 @@ class MlfClipLoader(BaseMmcLoader):
             model_name=model_name, 
             pretrained=dataset, 
             precision = 'fp16', 
-            jit = False
-            device=DEVICE)
+            jit = False,
+            device=device)
 
         model.requires_grad_(False)
         model.eval()
