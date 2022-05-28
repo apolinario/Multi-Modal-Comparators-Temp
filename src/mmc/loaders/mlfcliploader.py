@@ -46,12 +46,15 @@ class MlfClipLoader(BaseMmcLoader):
         #model, _, preprocess_image = open_clip.create_model_and_transforms(
         model, preprocess_image, _ = open_clip.create_model_and_transforms(
             model_name=model_name, 
-            pretrained=dataset)
+            pretrained=dataset, 
+            precision = 'fp16', 
+            jit = False
+            device=DEVICE)
 
         model.requires_grad_(False)
         model.eval()
         model.set_grad_checkpointing()
-        model.to(device, memory_format=torch.channels_last)
+        #model.to(device, memory_format=torch.channels_last)
         #tokenizer = clip.tokenize # clip.simple_tokenizer.SimpleTokenizer()
         tokenizer = open_clip.tokenize # clip.simple_tokenizer.SimpleTokenizer()
         def preprocess_image_extended(*args, **kwargs):
