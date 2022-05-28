@@ -47,7 +47,8 @@ class MlfClipLoader(BaseMmcLoader):
         model, preprocess_image, _ = open_clip.create_model_and_transforms(
             model_name=model_name, 
             pretrained=dataset, 
-            precision = 'fp16', 
+            precision = 'fp16',
+            force_quick_gelu= True if dataset=="openai" or "quickgelu" in model_name else False, 
             jit = False,
             device=device)
 
